@@ -28,6 +28,20 @@
             border-radius: 8px;
         }
 
+        /* Estilos para las imágenes SVG */
+        .logo-left {
+            width: 250px;
+            float: left;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .logo-center {
+            width: 200px;
+            display: block;
+            margin: 40px auto 20px;
+        }
+
         /* II. Tipografía y Estilo de Texto */
         h1, h2, h3 {
             font-family: 'Montserrat', sans-serif;
@@ -156,254 +170,270 @@
 </head>
 <body>
 
-    <div class="container">
-        <!-- ===== IMAGEN INICIAL AÑADIDA AQUÍ ===== -->
-        <img src="Isologo_fondo_blanco.svg" alt="Logotipo" style="width: 250px; margin-bottom: 20px;">
-        
-        <h1>10 pasos para crear la tabla del PYG</h1>
+<!-- Logo al principio del documento (izquierda, 250px) -->
+<svg class="logo-left" viewBox="0 0 1221 463" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="hidden">
+    <g transform="translate(-1915 -88)">
+        <text fill="#595959" font-family="Montserrat Black,Montserrat Black_MSFontService,sans-serif" font-weight="900" font-size="183" transform="matrix(1 0 0 1 2025.04 364)">mentor</text>
+        <text fill="#AEC000" font-family="Montserrat Black,Montserrat Black_MSFontService,sans-serif" font-weight="900" font-size="220" transform="matrix(1 0 0 1 2756.66 364)">BI</text>
+        <text fill="#595959" font-family="Montserrat ExtraBold,Montserrat ExtraBold_MSFontService,sans-serif" font-weight="800" font-size="50" transform="matrix(1 0 0 1 2767.54 419)">finanzas</text>
+        <path d="M1975 333 2001.67 333 2001.67 391.667 2064 391.667 2064 417 1975 417Z" fill="#AEC000" fill-rule="evenodd"/>
+        <path d="M3051 241 3024.33 241 3024.33 182.333 2962 182.333 2962 157 3051 157Z" fill="#AEC000" fill-rule="evenodd"/>
+    </g>
+</svg>
 
-        <div class="intro">
-            <p>Esta guía te mostrará cómo implementar (compilar) las medidas <strong>DAX</strong> en la tabla de la cuenta de pérdidas y ganancias (PYG), paso a paso. Partimos de un <strong>modelo de datos</strong> (<strong>modelo semántico</strong>) ya completo, con todas las tablas, las medidas <strong>DAX</strong> necesarias e incluso un fondo diseñado en PowerPoint. También se crearán los formatos condicionales adecuados.</p>
-            <p><strong>El objetivo</strong>: utilizar el <strong>panel Compilar</strong> para crear la estructura de la matriz de forma que se muestren todos los datos.</p>
-        </div>
+<div class="container">
+    <h1>10 pasos para crear la tabla del PYG</h1>
 
-        <h2>Paso a paso</h2>
-
-        <details>
-            <summary>Paso 1: Añadir el objeto visual de tabla</summary>
-            <div class="step-content">
-                <div class="explanation-box why">
-                    <h3>El porqué (la lógica)</h3>
-                    <p>Comenzamos la página de informe con el lienzo rellenado por una imagen SVG que hace las veces de fondo con un cercamiento para la tabla del PYG y un título. Ahora, para crear la tabla, el objeto visual <strong>Tabla</strong> es la elección perfecta.</p>
-                </div>
-                
-                <div class="explanation-box how">
-                    <h3>El cómo (la práctica)</h3>
-                    <ul>
-                        <li>Asegúrate de estar en la <strong>vista Informe</strong> de Power BI.</li>
-                        <li>En el <strong>panel Compilar</strong>, haz clic (dentro de la <strong>galería de objetos visuales</strong>) en el icono de <strong>Tabla</strong> para añadir una al lienzo.</li>
-                        <li>Ajusta su tamaño para que ocupe toda la zona blanca de cercamiento.</li>
-                    </ul>
-                </div>
-            </div>
-        </details>
-        
-        <details>
-            <summary>Paso 2: Compilar las filas de la tabla</summary>
-            <div class="step-content">
-                <div class="explanation-box why">
-                    <h3>El porqué (la lógica)</h3>
-                    <p>La estructura de nuestra cuenta de resultados (las descripciones de cada línea) está definida en la tabla <strong>dimFilasPYG</strong>. Esta será la base sobre la que mostraremos todos nuestros cálculos implementando varias columnas a la derecha.</p>
-                </div>
-
-                <div class="explanation-box how">
-                    <h3>El cómo (la práctica)</h3>
-                    <ul>
-                        <li>Con la matriz seleccionada, abre el <strong>panel Compilar</strong>.</li>
-                        <li>En la sección <strong>Filas</strong>, haz clic en <strong>Agregar datos</strong>.</li>
-                        <li>Busca la tabla <strong>dimFilasPYG</strong> y selecciona la columna <strong>nombreFilaPYG</strong>.</li>
-                        <li><strong>Cambiar nombre</strong>: haz doble clic sobre <strong>nombreFilaPYG</strong> y renómbralo a <strong>Partidas</strong>. A veces, intentar esta opción mediante doble clic genera problemas. En estos casos, es aconsejable utilizar otra estrategia: clic con el botón secundario del ratón y elegir el comando <strong>Cambiar nombre de este objeto visual</strong>.</li>
-                    </ul>
-                </div>
-            </div>
-        </details>
-        
-        <details>
-            <summary>Paso 3: Compilar las medidas en "Valores"</summary>
-            <div class="step-content">
-                <div class="explanation-box why">
-                    <h3>El porqué (la lógica)</h3>
-                    <p>Aquí es donde el informe cobra vida. Las medidas <strong>DAX</strong> son los cálculos predefinidos en forma de fórmulas que hemos guardado en tablas contenedoras de medidas. Al añadirlas a la sección <strong>Valores</strong>, Power BI calcula cada métrica para cada una de las filas del objeto visual de tabla que definimos en el paso anterior.</p>
-                </div>
-
-                <div class="explanation-box how">
-                    <h3>El cómo (la práctica)</h3>
-                    <p>En el <strong>panel Compilar</strong>, sección <strong>Valores</strong>, añade (haciendo clic en <strong>Agregar datos</strong> y buscándolas) y renombra las siguientes medidas desde la tabla contenedora de medidas llamada <strong>1 Medidas PYG</strong> en este orden:</p>
-                    <ul>
-                        <li>Añade <strong>#03 Importes PYG n-1</strong> y renómbrala (doble clic para editar) a <strong>PYG n-1</strong>.</li>
-                        <li>Añade <strong>#02 Importes PYG actual</strong> y renómbrala (doble clic para editar) a <strong>PYG actual</strong>.</li>
-                        <li>Añade <strong>#04 % Var actual / n-1</strong> y renómbrala (doble clic para editar) a <strong>% Var. Partida</strong>.</li>
-                        <li>Añade <strong>#05 Var € PYG / n-1 (FC)</strong> y renómbrala (doble clic para editar) a <strong>OK/NO OK</strong>.</li>
-                    </ul>
-                </div>
-            </div>
-        </details>
-
-        <details>
-            <summary>Paso 4: Aplicar formato a las medidas</summary>
-            <div class="step-content">
-                <div class="explanation-box why">
-                    <h3>El porqué (la lógica)</h3>
-                    <p>En este apartado proporcionaremos formato a las medidas para que expresen los valores de forma adecuada para una óptima interpretación.</p>
-                </div>
-
-                <div class="explanation-box how">
-                    <h3>El cómo (la práctica)</h3>
-                    <p>En el <strong>panel Datos</strong>, selecciona una a una las siguientes medidas y aplícales formato desde la <strong>ficha Herramientas de medición</strong> / <strong>grupo Formato</strong> / <strong>grupo Formato</strong>:</p>
-                    <ul>
-                        <li>Medida <strong>#02 Importes PYG actual</strong>: Clic en el comando <strong>$</strong> y elegimos opción de divisa / Reducimos decimales a 0 (cero).</li>
-                        <li>Medida <strong>#03 Importes PYG n-1</strong>: Clic en el comando <strong>$</strong> y elegimos opción de divisa / Reducimos decimales a 0 (cero).</li>
-                        <li>Medida <strong>#04 % Var actual / n-1</strong>: Clic en el desplegable <strong>Formato</strong> para elegir <strong>Porcentaje</strong>.</li>
-                    </ul>
-                </div>
-            </div>
-        </details>
-
-        <details>
-            <summary>Paso 5: Aplicar formato condicional de iconos</summary>
-            <div class="step-content">
-                <div class="explanation-box why">
-                    <h3>El porqué (la lógica)</h3>
-                    <p>Los iconos son una herramienta visual muy potente. Nos permiten identificar de un vistazo si la variación de una partida ha sido positiva (verde), negativa (rojo) o neutra (naranja), sin necesidad de leer los números. Esto hace que el informe sea mucho más fácil y rápido de interpretar.</p>
-                </div>
-
-                <div class="explanation-box how">
-                    <h3>El cómo (la práctica)</h3>
-                    <ul>
-                        <li>1. En el <strong>panel Compilar</strong>, haz clic derecho sobre la medida <strong>OK/NO OK</strong>.</li>
-                        <li>2. En el menú contextual, selecciona <strong>Formato condicional</strong> y luego <strong>Iconos</strong>.</li>
-                        <li>3. En la ventana de configuración, aplica los siguientes ajustes:
-                            <ul>
-                                <li><strong>Estilo de formato</strong>: <strong>Reglas</strong></li>
-                                <li><strong>Campo en el que basar esto</strong>: <strong>OK/NO OK</strong></li>
-                                <li><strong>Diseño de los iconos</strong>: <strong>Solo icono</strong></li>
-                                <li><strong>Alineación</strong>: <strong>Superior</strong></li>
-                            </ul>
-                        </li>
-                        <li>4. Define las siguientes <strong>Reglas</strong> (el orden es importante):
-                            <ul>
-                                <li><strong>Regla 1 (Rojo)</strong>: Si el valor es >= <strong>Min Número</strong> y < <strong>0 Número</strong>, entonces el icono es un círculo rojo.</li>
-                                <li><strong>Regla 2 (Amarillo)</strong>: Si el valor es = <strong>0 Número</strong>, entonces el icono es un guion naranja.</li>
-                                <li><strong>Regla 3 (Verde)</strong>: Si el valor es > <strong>0 Número</strong> y <= <strong>Max Número</strong>, entonces el icono es un círculo verde.</li>
-                                <li>Para conseguir los valores <strong>Min</strong> y <strong>Max</strong> debemos eliminar el valor por defecto que pone Power BI en el campo.</li>
-                            </ul>
-                        </li>
-                        <li>5. Haz clic en <strong>Aceptar</strong> para aplicar el formato.</li>
-                    </ul>
-                </div>
-            </div>
-        </details>
-
-        <details>
-            <summary>Paso 6: Aplicar formato condicional de fondo de fila</summary>
-            <div class="step-content">
-                <div class="explanation-box why">
-                    <h3>El porqué (la lógica)</h3>
-                    <p>Para mejorar la legibilidad del informe, destacaremos las filas que contienen subtotales (como "A. RESULTADO DE LA EXPLOTACIÓN") con un fondo gris. Esto crea una separación visual clara entre los diferentes bloques de la cuenta de resultados, permitiendo al usuario identificar rápidamente las cifras clave de resumen.</p>
-                    <p>Utilizamos una medida DAX auxiliar, <strong>#06 Fondo gris H</strong>, que devuelve el valor 1 si la fila es un subtotal y BLANK en caso contrario. El formato condicional se activará solo para las filas donde el valor sea 1.</p>
-                </div>
-
-                <div class="explanation-box how">
-                    <h3>El cómo (la práctica)</h3>
-                    <p>Este formato debe aplicarse, individualmente, a cada columna de la tabla compilada en el <strong>panel Compilar</strong>, pero usando siempre la misma medida como referencia (<strong>#06 Fondo gris H</strong>).</p>
-                    <ul>
-                        <li>1. Selecciona el objeto visual de tabla y activa el <strong>panel Compilar</strong>.</li>
-                        <li>2. Clic con el botón secundario sobre la primera columna que hay compilada. Pasa el ratón por la opción <strong>Formato condicional</strong> y elige la opción <strong>Color de fondo</strong> en el menú que emerge.</li>
-                        <li>3. En la ventana de configuración, aplica los siguientes ajustes:
-                            <ul>
-                                <li><strong>Estilo de formato</strong>: <strong>Reglas</strong></li>
-                                <li><strong>Campo en el que basar esto</strong>: Busca y selecciona la medida <strong>#06 Fondo gris H</strong> de la tabla <strong>1 Medidas PYG</strong>.</li>
-                                <li><strong>Regla</strong>: Define una única regla: Si el valor es <strong>1 Número</strong>, entonces elige un color <strong>gris claro</strong>.</li>
-                            </ul>
-                        </li>
-                        <li>4. Haz clic en <strong>Aceptar</strong>. Verás que las filas de los subtotales de la primera columna ya tienen fondo gris.</li>
-                        <li>5. <strong>Repite el proceso</strong>: En la misma sección <strong>Elementos de celda</strong>, selecciona las demás columnas (<strong>PYG n-1</strong>, <strong>PYG actual</strong>, <strong>% Var. Partida</strong>) en el desplegable y repite los pasos 3 y 4 para cada una de ellas.</li>
-                    </ul>
-                </div>
-            </div>
-        </details>
-
-        <details>
-            <summary>Paso 7: Configurar la cuadrícula y opciones generales</summary>
-            <div class="step-content">
-                <div class="explanation-box why">
-                    <h3>El porqué (la lógica)</h3>
-                    <p>Establecer una base sólida para el formato global nos ahorra tiempo y garantiza la consistencia. Aumentar el espaciado entre filas (padding) dota al diseño de "espacio para respirar", lo que reduce la carga cognitiva del usuario y facilita el escaneo visual de la información. Un tamaño de fuente global de 12 puntos es un estándar de legibilidad excelente para la mayoría de las pantallas.</p>
-                </div>
-                
-                <div class="explanation-box how">
-                    <h3>El cómo (la práctica)</h3>
-                    <p>Con el objeto visual seleccionado, activa el <strong>panel de Formato</strong> y luego la <strong>pestaña Objeto visual</strong>.</p>
-                    <ul>
-                        <li>1. Ve a la sección <strong>Cuadrícula</strong> y expande la subsección <strong>Opciones</strong>.</li>
-                        <li>2. Ajusta el <strong>Espaciado interno de las filas</strong> al valor <strong>5</strong>.</li>
-                        <li>3. Modifica el <strong>Tamaño de fuente global</strong> al valor <strong>12</strong>.</li>
-                        <li>4. <strong>Consejo de experto</strong>: Este ajuste global es un excelente punto de partida porque se establece para todas las partes del objeto visual el valor aquí. Si más adelante necesitas que un elemento específico (como los totales) sea más grande, podrás modificarlo individualmente, pero partirás de una base consistente.</li>
-                    </ul>
-                </div>
-            </div>
-        </details>
-        
-        <details>
-            <summary>Paso 8: Dar formato a los valores</summary>
-            <div class="step-content">
-                <div class="explanation-box why">
-                    <h3>El porqué (la lógica)</h3>
-                    <p>Los valores son el corazón de la tabla. Desactivar el <strong>Ajuste de texto</strong> asegura que todas las filas mantengan una altura uniforme, creando una cuadrícula visualmente ordenada y predecible. Establecer el color de fondo alterno en blanco crea un aspecto minimalista y limpio, eliminando las "rayas de cebra" que a veces pueden distraer. Este enfoque de diseño plano centra toda la atención en los datos.</p>
-                </div>
-
-                <div class="explanation-box how">
-                    <h3>El cómo (la práctica)</h3>
-                    <p>En la misma <strong>pestaña de Objeto visual</strong>, busca la sección <strong>Valores</strong>.</p>
-                    <ul>
-                        <li>1. Expande la sección <strong>Valores</strong>.</li>
-                        <li>2. Asegúrate de que el tamaño de la <strong>Fuente</strong> es <strong>12</strong> (debería haberlo heredado del ajuste global).</li>
-                        <li>3. En <strong>Alternar color de fondo</strong>, haz clic en la muestra de color y elige el <strong>blanco</strong>. El objetivo es que ambas filas (la normal y la alterna) tengan el mismo fondo para un look uniforme.</li>
-                        <li>4. Desactiva el interruptor de <strong>Ajuste de texto</strong>.</li>
-                    </ul>
-                </div>
-            </div>
-        </details>
-        
-        <details>
-            <summary>Paso 9: Estilizar los encabezados de columna</summary>
-            <div class="step-content">
-                <div class="explanation-box why">
-                    <h3>El porqué (la lógica)</h3>
-                    <p>Los encabezados de columna no son datos, son etiquetas que describen los datos. Aplicar <strong>negrita</strong> es un principio fundamental de la jerarquía visual. Este simple cambio crea una distinción clara entre los títulos y los valores, permitiendo al usuario comprender la estructura de la tabla de un solo vistazo y mejorando enormemente la velocidad de interpretación.</p>
-                </div>
-
-                <div class="explanation-box how">
-                    <h3>El cómo (la práctica)</h3>
-                    <p>Justo debajo de la sección <strong>Valores</strong>, encontrarás <strong>Encabezados de columna</strong>.</p>
-                    <ul>
-                        <li>1. Expande la sección <strong>Encabezados de columna</strong>.</li>
-                        <li>2. Dentro, expande la subsección <strong>Texto</strong>.</li>
-                        <li>3. En las opciones de <strong>Fuente</strong>, haz clic en el icono de la <strong>B</strong> para activar la <strong>negrita</strong>.</li>
-                    </ul>
-                </div>
-            </div>
-        </details>
-
-        <details>
-            <summary>Paso 10: Gestionar la fila de totales</summary>
-            <div class="step-content">
-                <div class="explanation-box why">
-                    <h3>El porqué (la lógica)</h3>
-                    <p>La fila de <strong>Total general</strong> no es necesaria para este PYG, puesto que la tabla <strong>dimFilasPYG</strong> marca perfectamente las filas que debe haber, incluyendo el resultado final del ejercicio.</p>
-                </div>
-
-                <div class="explanation-box how">
-                    <h3>El cómo (la práctica)</h3>
-                    <p>Busca la sección <strong>Totales</strong> en el <strong>panel de Formato</strong>.</p>
-                    <ul>
-                        <li>1. Expande la sección <strong>Totales</strong>.</li>
-                        <li>2. Dentro de esta, busca la subsección <strong>Valores</strong>.</li>
-                        <li>3. <strong>Desactiva el interruptor principal</strong> de la subsección <strong>Valores</strong>. Verás cómo la fila de totales desaparece inmediatamente de tu tabla.</li>
-                    </ul>
-                </div>
-            </div>
-        </details>
-
-        <div class="conclusion">
-            <h3>¡Ya está!</h3>
-            <p>Siguiendo estos pasos, ya tenemos la tabla con todos los datos y formatos.</p>
-        </div>
-        
-        <!-- ===== IMAGEN FINAL AÑADIDA AQUÍ ===== -->
-        <div style="text-align: right; margin-top: 30px;">
-            <img src="Isologo_fondo_blanco.svg" alt="Logotipo" style="width: 200px;">
-        </div>
+    <div class="intro">
+        <p>Esta guía te mostrará cómo implementar (compilar) las medidas <strong>DAX</strong> en la tabla de la cuenta de pérdidas y ganancias (PYG), paso a paso. Partimos de un <strong>modelo de datos</strong> (<strong>modelo semántico</strong>) ya completo, con todas las tablas, las medidas <strong>DAX</strong> necesarias e incluso un fondo diseñado en PowerPoint. También se crearán los formatos condicionales adecuados.</p>
+        <p><strong>El objetivo</strong>: utilizar el <strong>panel Compilar</strong> para crear la estructura de la matriz de forma que se muestren todos los datos.</p>
     </div>
+
+    <h2>Paso a paso</h2>
+
+    <details>
+        <summary>Paso 1: Añadir el objeto visual de tabla</summary>
+        <div class="step-content">
+            <div class="explanation-box why">
+                <h3>El porqué (la lógica)</h3>
+                <p>Comenzamos la página de informe con el lienzo rellenado por una imagen SVG que hace las veces de fondo con un cercamiento para la tabla del PYG y un título. Ahora, para crear la tabla, el objeto visual <strong>Tabla</strong> es la elección perfecta.</p>
+            </div>
+            
+            <div class="explanation-box how">
+                <h3>El cómo (la práctica)</h3>
+                <ul>
+                    <li>Asegúrate de estar en la <strong>vista Informe</strong> de Power BI.</li>
+                    <li>En el <strong>panel Compilar</strong>, haz clic (dentro de la <strong>galería de objetos visuales</strong>) en el icono de <strong>Tabla</strong> para añadir una al lienzo.</li>
+                    <li>Ajusta su tamaño para que ocupe toda la zona blanca de cercamiento.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+    
+    <details>
+        <summary>Paso 2: Compilar las filas de la tabla</summary>
+        <div class="step-content">
+            <div class="explanation-box why">
+                <h3>El porqué (la lógica)</h3>
+                <p>La estructura de nuestra cuenta de resultados (las descripciones de cada línea) está definida en la tabla <strong>dimFilasPYG</strong>. Esta será la base sobre la que mostraremos todos nuestros cálculos implementando varias columnas a la derecha.</p>
+            </div>
+
+            <div class="explanation-box how">
+                <h3>El cómo (la práctica)</h3>
+                 <ul>
+                    <li>Con la matriz seleccionada, abre el <strong>panel Compilar</strong>.</li>
+                    <li>En la sección <strong>Filas</strong>, haz clic en <strong>Agregar datos</strong>.</li>
+                    <li>Busca la tabla <strong>dimFilasPYG</strong> y selecciona la columna <strong>nombreFilaPYG</strong>.</li>
+                    <li><strong>Cambiar nombre</strong>: haz doble clic sobre <strong>nombreFilaPYG</strong> y renómbralo a <strong>Partidas</strong>. A veces, intentar esta opción mediante doble clic genera problemas. En estos casos, es aconsejable utilizar otra estrategia: clic con el botón secundario del ratón y elegir el comando <strong>Cambiar nombre de este objeto visual</strong>.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+    
+    <details>
+        <summary>Paso 3: Compilar las medidas en "Valores"</summary>
+        <div class="step-content">
+            <div class="explanation-box why">
+                <h3>El porqué (la lógica)</h3>
+                <p>Aquí es donde el informe cobra vida. Las medidas <strong>DAX</strong> son los cálculos predefinidos en forma de fórmulas que hemos guardado en tablas contenedoras de medidas. Al añadirlas a la sección <strong>Valores</strong>, Power BI calcula cada métrica para cada una de las filas del objeto visual de tabla que definimos en el paso anterior.</p>
+            </div>
+
+            <div class="explanation-box how">
+                <h3>El cómo (la práctica)</h3>
+                <p>En el <strong>panel Compilar</strong>, sección <strong>Valores</strong>, añade (haciendo clic en <strong>Agregar datos</strong> y buscándolas) y renombra las siguientes medidas desde la tabla contenedora de medidas llamada <strong>1 Medidas PYG</strong> en este orden:</p>
+                <ul>
+                    <li>Añade <strong>#03 Importes PYG n-1</strong> y renómbrala (doble clic para editar) a <strong>PYG n-1</strong>.</li>
+                    <li>Añade <strong>#02 Importes PYG actual</strong> y renómbrala (doble clic para editar) a <strong>PYG actual</strong>.</li>
+                    <li>Añade <strong>#04 % Var actual / n-1</strong> y renómbrala (doble clic para editar) a <strong>% Var. Partida</strong>.</li>
+                    <li>Añade <strong>#05 Var € PYG / n-1 (FC)</strong> y renómbrala (doble clic para editar) a <strong>OK/NO OK</strong>.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>Paso 4: Aplicar formato a las medidas</summary>
+        <div class="step-content">
+            <div class="explanation-box why">
+                <h3>El porqué (la lógica)</h3>
+                <p>En este apartado proporcionaremos formato a las medidas para que expresen los valores de forma adecuada para una óptima interpretación.</p>
+            </div>
+
+            <div class="explanation-box how">
+                <h3>El cómo (la práctica)</h3>
+                <p>En el <strong>panel Datos</strong>, selecciona una a una las siguientes medidas y aplícales formato desde la <strong>ficha Herramientas de medición</strong> / <strong>grupo Formato</strong> / <strong>grupo Formato</strong>:</p>
+                <ul>
+                    <li>Medida <strong>#02 Importes PYG actual</strong>: Clic en el comando <strong>$</strong> y elegimos opción de divisa / Reducimos decimales a 0 (cero).</li>
+                    <li>Medida <strong>#03 Importes PYG n-1</strong>: Clic en el comando <strong>$</strong> y elegimos opción de divisa / Reducimos decimales a 0 (cero).</li>
+                    <li>Medida <strong>#04 % Var actual / n-1</strong>: Clic en el desplegable <strong>Formato</strong> para elegir <strong>Porcentaje</strong>.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>Paso 5: Aplicar formato condicional de iconos</summary>
+        <div class="step-content">
+            <div class="explanation-box why">
+                <h3>El porqué (la lógica)</h3>
+                <p>Los iconos son una herramienta visual muy potente. Nos permiten identificar de un vistazo si la variación de una partida ha sido positiva (verde), negativa (rojo) o neutra (naranja), sin necesidad de leer los números. Esto hace que el informe sea mucho más fácil y rápido de interpretar.</p>
+            </div>
+
+            <div class="explanation-box how">
+                <h3>El cómo (la práctica)</h3>
+                <ul>
+                    <li>1. En el <strong>panel Compilar</strong>, haz clic derecho sobre la medida <strong>OK/NO OK</strong>.</li>
+                    <li>2. En el menú contextual, selecciona <strong>Formato condicional</strong> y luego <strong>Iconos</strong>.</li>
+                    <li>3. En la ventana de configuración, aplica los siguientes ajustes:
+                        <ul>
+                            <li><strong>Estilo de formato</strong>: <strong>Reglas</strong></li>
+                            <li><strong>Campo en el que basar esto</strong>: <strong>OK/NO OK</strong></li>
+                            <li><strong>Diseño de los iconos</strong>: <strong>Solo icono</strong></li>
+                            <li><strong>Alineación</strong>: <strong>Superior</strong></li>
+                        </ul>
+                    </li>
+                    <li>4. Define las siguientes <strong>Reglas</strong> (el orden es importante):
+                        <ul>
+                            <li><strong>Regla 1 (Rojo)</strong>: Si el valor es >= <strong>Min Número</strong> y < <strong>0 Número</strong>, entonces el icono es un círculo rojo.</li>
+                            <li><strong>Regla 2 (Amarillo)</strong>: Si el valor es = <strong>0 Número</strong>, entonces el icono es un guion naranja.</li>
+                            <li><strong>Regla 3 (Verde)</strong>: Si el valor es > <strong>0 Número</strong> и <= <strong>Max Número</strong>, entonces el icono es un círculo verde.</li>
+			                <li>Para conseguir los valores <strong>Min</strong> y <strong>Max</strong> debemos eliminar el valor por defecto que pone Power BI en el campo.</li>
+                        </ul>
+                    </li>
+                    <li>5. Haz clic en <strong>Aceptar</strong> para aplicar el formato.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>Paso 6: Aplicar formato condicional de fondo de fila</summary>
+        <div class="step-content">
+            <div class="explanation-box why">
+                <h3>El porqué (la lógica)</h3>
+                <p>Para mejorar la legibilidad del informe, destacaremos las filas que contienen subtotales (como "A. RESULTADO DE LA EXPLOTACIÓN") con un fondo gris. Esto crea una separación visual clara entre los diferentes bloques de la cuenta de resultados, permitiendo al usuario identificar rápidamente las cifras clave de resumen.</p>
+                <p>Utilizamos una medida DAX auxiliar, <strong>#06 Fondo gris H</strong>, que devuelve el valor 1 si la fila es un subtotal y BLANK en caso contrario. El formato condicional se activará solo para las filas donde el valor sea 1.</p>
+            </div>
+
+            <div class="explanation-box how">
+                <h3>El cómo (la práctica)</h3>
+                <p>Este formato debe aplicarse, individualmente, a cada columna de la tabla compilada en el <strong>panel Compilar</strong>, pero usando siempre la misma medida como referencia (<strong>#06 Fondo gris H</strong>).</p>
+                <ul>
+                    <li>1. Selecciona el objeto visual de tabla y activa el <strong>panel Compilar</strong>.</li>
+                    <li>2. Clic con el botón secundario sobre la primera columna que hay compilada. Pasa el ratón por la opción <strong>Formato condicional</strong> y elige la opción <strong>Color de fondo</strong> en el menú que emerge.</li>
+                    <li>3. En la ventana de configuración, aplica los siguientes ajustes:
+                        <ul>
+                            <li><strong>Estilo de formato</strong>: <strong>Reglas</strong></li>
+                            <li><strong>Campo en el que basar esto</strong>: Busca y selecciona la medida <strong>#06 Fondo gris H</strong> de la tabla <strong>1 Medidas PYG</strong>.</li>
+                            <li><strong>Regla</strong>: Define una única regla: Si el valor es <strong>1 Número</strong>, entonces elige un color <strong>gris claro</strong>.</li>
+                        </ul>
+                    </li>
+                    <li>4. Haz clic en <strong>Aceptar</strong>. Verás que las filas de los subtotales de la primera columna ya tienen fondo gris.</li>
+                    <li>5. <strong>Repite el proceso</strong>: En la misma sección <strong>Elementos de celda</strong>, selecciona las demás columnas (<strong>PYG n-1</strong>, <strong>PYG actual</strong>, <strong>% Var. Partida</strong>) en el desplegable y repite los pasos 3 y 4 para cada una de ellas.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>Paso 7: Configurar la cuadrícula y opciones generales</summary>
+        <div class="step-content">
+            <div class="explanation-box why">
+                <h3>El porqué (la lógica)</h3>
+                <p>Establecer una base sólida para el formato global nos ahorra tiempo y garantiza la consistencia. Aumentar el espaciado entre filas (padding) dota al diseño de "espacio para respirar", lo que reduce la carga cognitiva del usuario y facilita el escaneo visual de la información. Un tamaño de fuente global de 12 puntos es un estándar de legibilidad excelente para la mayoría de las pantallas.</p>
+            </div>
+            
+            <div class="explanation-box how">
+                <h3>El cómo (la práctica)</h3>
+                <p>Con el objeto visual seleccionado, activa el <strong>panel de Formato</strong> y luego la <strong>pestaña Objeto visual</strong>.</p>
+                 <ul>
+                    <li>1. Ve a la sección <strong>Cuadrícula</strong> и expande la subsección <strong>Opciones</strong>.</li>
+                    <li>2. Ajusta el <strong>Espaciado interno de las filas</strong> al valor <strong>5</strong>.</li>
+                    <li>3. Modifica el <strong>Tamaño de fuente global</strong> al valor <strong>12</strong>.</li>
+                    <li>4. <strong>Consejo de experto</strong>: Este ajuste global es un excelente punto de partida porque se establece para todas las partes del objeto visual el valor aquí. Si más adelante necesitas que un elemento específico (como los totales) sea más grande, podrás modificarlo individualmente, pero partirás de una base consistente.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+    
+    <details>
+        <summary>Paso 8: Dar formato a los valores</summary>
+        <div class="step-content">
+            <div class="explanation-box why">
+                <h3>El porqué (la lógica)</h3>
+                <p>Los valores son el corazón de la tabla. Desactivar el <strong>Ajuste de texto</strong> asegura que todas las filas mantengan una altura uniforme, creando una cuadrícula visualmente ordenada y predecible. Establecer el color de fondo alterno en blanco crea un aspecto minimalista y limpio, eliminando las "rayas de cebra" que a veces pueden distraer. Este enfoque de diseño plano centra toda la atención en los datos.</p>
+            </div>
+
+            <div class="explanation-box how">
+                <h3>El cómo (la práctica)</h3>
+                <p>En la misma <strong>pestaña de Objeto visual</strong>, busca la sección <strong>Valores</strong>.</p>
+                <ul>
+                    <li>1. Expande la sección <strong>Valores</strong>.</li>
+                    <li>2. Asegúrate de que el tamaño de la <strong>Fuente</strong> es <strong>12</strong> (debería haberlo heredado del ajuste global).</li>
+                    <li>3. En <strong>Alternar color de fondo</strong>, haz clic en la muestra de color y elige el <strong>blanco</strong>. El objetivo es que ambas filas (la normal y la alterna) tengan el mismo fondo para un look uniforme.</li>
+                    <li>4. Desactiva el interruptor de <strong>Ajuste de texto</strong>.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+    
+    <details>
+        <summary>Paso 9: Estilizar los encabezados de columna</summary>
+        <div class="step-content">
+            <div class="explanation-box why">
+                <h3>El porqué (la lógica)</h3>
+                <p>Los encabezados de columna no son datos, son etiquetas que describen los datos. Aplicar <strong>negrita</strong> es un principio fundamental de la jerarquía visual. Este simple cambio crea una distinción clara entre los títulos y los valores, permitiendo al usuario comprender la estructura de la tabla de un solo vistazo y mejorando enormemente la velocidad de interpretación.</p>
+            </div>
+
+            <div class="explanation-box how">
+                <h3>El cómo (la práctica)</h3>
+                <p>Justo debajo de la sección <strong>Valores</strong>, encontrarás <strong>Encabezados de columna</strong>.</p>
+                <ul>
+                    <li>1. Expande la sección <strong>Encabezados de columna</strong>.</li>
+                    <li>2. Dentro, expande la subsección <strong>Texto</strong>.</li>
+                    <li>3. En las opciones de <strong>Fuente</strong>, haz clic en el icono de la <strong>B</strong> para activar la <strong>negrita</strong>.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>Paso 10: Gestionar la fila de totales</summary>
+        <div class="step-content">
+            <div class="explanation-box why">
+                <h3>El porqué (la lógica)</h3>
+                <p>La fila de <strong>Total general</strong> no es necesaria para este PYG, puesto que la tabla <strong>dimFilasPYG</strong> marca perfectamente las filas que debe haber, incluyendo el resultado final del ejercicio.</p>
+            </div>
+
+            <div class="explanation-box how">
+                <h3>El cómo (la práctica)</h3>
+                 <p>Busca la sección <strong>Totales</strong> en el <strong>panel de Formato</strong>.</p>
+                <ul>
+                    <li>1. Expande la sección <strong>Totales</strong>.</li>
+                    <li>2. Dentro de esta, busca la subsección <strong>Valores</strong>.</li>
+                    <li>3. <strong>Desactiva el interruptor principal</strong> de la subsección <strong>Valores</strong>. Verás cómo la fila de totales desaparece inmediatamente de tu tabla.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    <div class="conclusion">
+        <h3>¡Ya está!</h3>
+        <p>Siguiendo estos pasos, ya tenemos la tabla con todos los datos y formatos.</p>
+    </div>
+
+</div>
+
+<!-- Logo al final del documento (centrado, 200px) -->
+<svg class="logo-center" viewBox="0 0 1221 463" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="hidden">
+    <g transform="translate(-1915 -88)">
+        <text fill="#595959" font-family="Montserrat Black,Montserrat Black_MSFontService,sans-serif" font-weight="900" font-size="183" transform="matrix(1 0 0 1 2025.04 364)">mentor</text>
+        <text fill="#AEC000" font-family="Montserrat Black,Montserrat Black_MSFontService,sans-serif" font-weight="900" font-size="220" transform="matrix(1 0 0 1 2756.66 364)">BI</text>
+        <text fill="#595959" font-family="Montserrat ExtraBold,Montserrat ExtraBold_MSFontService,sans-serif" font-weight="800" font-size="50" transform="matrix(1 0 0 1 2767.54 419)">finanzas</text>
+        <path d="M1975 333 2001.67 333 2001.67 391.667 2064 391.667 2064 417 1975 417Z" fill="#AEC000" fill-rule="evenodd"/>
+        <path d="M3051 241 3024.33 241 3024.33 182.333 2962 182.333 2962 157 3051 157Z" fill="#AEC000" fill-rule="evenodd"/>
+    </g>
+</svg>
+
 </body>
 </html>
